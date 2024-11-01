@@ -1,0 +1,30 @@
+@server = http://localhost:6035
+
+# 게시글 조회
+GET {{server}}/blog
+
+### 게시글 생성
+POST {{server}}/blog
+Content-Type: application/json
+
+{
+"title": "안녕하세요",
+"content": "반갑습니다.",
+"name": "김병현"
+}
+
+### 특정 게시글 조회
+GET {{server}}/blog/67048dbc39617e58793d6211
+
+### 게시글 삭제
+DELETE {{server}}/blog/67048dbc39617e58793d6211
+
+### 게시글 수정
+PUT {{server}}/blog/67048dbc39617e58793d6211
+Content-Type: application/json
+
+{
+"title": "수정된 제목",
+"content": "수정된 내용",
+"name": "김병현2"
+}
