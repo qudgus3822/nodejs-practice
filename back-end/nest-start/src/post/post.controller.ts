@@ -1,96 +1,87 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { PostService } from './post.service';
-import { PostDto } from './post.model';
 
 @Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  @Get()
-  async getAllPost() {
-    try {
-      // postService.list에서 글리스트와 페이지네이터를 가져옴
-      const posts = await this.postService.getAllPost();
+  // @Get()
+  // async getAllPost() {
+  //   try {
+  //     // postService.list에서 글리스트와 페이지네이터를 가져옴
+  //     const posts = await this.postService.getAllPost();
 
-      // 리스트 페이지 렌더링
-      console.log(posts);
-      return posts;
-    } catch (error) {
-      console.error(error);
-      return []; // 에러가 나는 경우는 빈값으로 렌더링
-    }
-  }
+  //     // 리스트 페이지 렌더링
+  //     console.log(posts);
+  //     return posts;
+  //   } catch (error) {
+  //     console.error(error);
+  //     return []; // 에러가 나는 경우는 빈값으로 렌더링
+  //   }
+  // }
 
-  @Post()
-  async writePost(@Body() postDto: PostDto) {
-    const { title, writer, password, content } = postDto;
+  // @Post()
+  // async writePost(@Body() postDto: PostType) {
+  //   const { title, writer, password, content } = postDto;
 
-    const post = {
-      title,
-      writer,
-      password,
-      content,
-      createdDt: new Date().toISOString(),
-    };
-    // 업데이트 결과
-    const result = this.postService.createPost(post);
-    return { isSuccess: true, id: result };
-  }
+  //   const post = {
+  //     title,
+  //     writer,
+  //     password,
+  //     content,
+  //     createdDt: new Date().toISOString(),
+  //   };
+  //   // 업데이트 결과
+  //   const result = this.postService.createPost(post);
+  //   return { isSuccess: true, id: result };
+  // }
 
-  @Get('/:id')
-  async getPostDetail(@Param() params) {
-    const postId = params.id; // 게시글 id
-    try {
-      // postService.list에서 글리스트와 페이지네이터를 가져옴
-      const data = await this.postService.getPost(postId);
+  // @Get('/:id')
+  // async getPostDetail(@Param() params) {
+  //   const postId = params.id; // 게시글 id
+  //   try {
+  //     // postService.list에서 글리스트와 페이지네이터를 가져옴
+  //     const data = await this.postService.getPost(postId);
 
-      // 리스트 페이지 렌더링
-      return data;
-    } catch (error) {
-      console.error(error);
-      return {}; // 에러가 나는 경우는 빈값으로 렌더링
-    }
-  }
+  //     // 리스트 페이지 렌더링
+  //     return data;
+  //   } catch (error) {
+  //     console.error(error);
+  //     return {}; // 에러가 나는 경우는 빈값으로 렌더링
+  //   }
+  // }
 
-  @Put()
-  async modifyPost(@Body() postDto: PostDto) {
-    const { id, title, writer, password, content } = postDto;
+  // @Put()
+  // async modifyPost(@Body() postDto: PostType) {
+  //   const { _id, title, writer, password, content } = postDto;
 
-    const post = {
-      title,
-      writer,
-      password,
-      content,
-      createdDt: new Date().toISOString(),
-    };
-    // 업데이트 결과
-    const result = this.postService.updatePost(id, post);
-    return { isSuccess: true, id: result };
-  }
+  //   const post = {
+  //     title,
+  //     writer,
+  //     password,
+  //     content,
+  //     createdDt: new Date().toISOString(),
+  //   };
+  //   // 업데이트 결과
+  //   const result = this.postService.updatePost(id, post);
+  //   return { isSuccess: true, id: result };
+  // }
 
-  @Delete('/id:')
-  async removePost(@Body() postDto: PostDto) {
-    const { id } = postDto;
-    try {
-      // collection의 deleteOne을 사용해 게시글 하나를 삭제
-      await this.postService.deletePost(id);
-      // 삭제 결과가 잘 못된 경우의 처리
+  // @Delete('/id:')
+  // async removePost(@Body() postDto: PostType) {
+  //   const { _id } = postDto;
+  //   try {
+  //     // collection의 deleteOne을 사용해 게시글 하나를 삭제
+  //     await this.postService.deletePost(_id);
+  //     // 삭제 결과가 잘 못된 경우의 처리
 
-      return { isSuccess: true };
-    } catch (error) {
-      // 에러가 난 경우의 처리
-      console.error(error);
-      return { isSuccess: false };
-    }
-  }
+  //     return { isSuccess: true };
+  //   } catch (error) {
+  //     // 에러가 난 경우의 처리
+  //     console.error(error);
+  //     return { isSuccess: false };
+  //   }
+  // }
 
   //   @Post('/write-comment')
   //   async writeComment(req, res) {

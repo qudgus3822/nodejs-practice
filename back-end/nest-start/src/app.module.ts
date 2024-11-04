@@ -11,10 +11,6 @@ import { AppController } from './app.controller';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 
-console.log('env : ' + process.env.NODE_ENV);
-console.log('TEST3 : ' + process.env.TEST3);
-console.log('MONGO_CONNECTION_STRING : ' + process.env.MONGO_CONNECTION_STRING);
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -26,6 +22,7 @@ console.log('MONGO_CONNECTION_STRING : ' + process.env.MONGO_CONNECTION_STRING);
     }),
     MongooseModule.forRoot(process.env.MONGO_CONNECTION_STRING),
     MongooseModule.forFeature([{ name: Blog.name, schema: BlogSchema }]),
+
     WeatherModule,
     UserModule,
     PostModule,

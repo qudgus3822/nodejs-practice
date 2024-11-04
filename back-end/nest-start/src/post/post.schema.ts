@@ -6,16 +6,16 @@ export type PostDocument = Post & Document;
 @Schema()
 export class Post {
   @Prop()
-  id: string;
-
-  @Prop()
   title: string;
 
   @Prop()
   content: string;
 
   @Prop()
-  name: string;
+  writer: string;
+
+  @Prop()
+  password: string;
 
   @Prop()
   createdDt: Date;

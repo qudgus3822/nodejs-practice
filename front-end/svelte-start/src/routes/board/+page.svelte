@@ -2,22 +2,14 @@
   import { apiFetch } from "$lib/api";
   import { loginInfo } from "$lib/store";
   import dayjs from "dayjs";
-  export let data: {
-    posts: Array<{
-      _id: string;
-      title: string;
-      writer: string;
-      hits: number;
-      createdDt: string;
-    }>;
-  };
-  debugger
+  export let data;
+
   loginInfo.set({
     email: "test",
     password: "테스트",
     token: "토큰",
   });
-
+  debugger;
   // $: currentPage = 1;
   // $: getPageData(currentPage);
   const getPageData = async (targetPage: number, search: string) => {
@@ -49,7 +41,6 @@
         `,
       }),
     });
-    data.posts = response.data.posts;
   };
 </script>
 
@@ -87,7 +78,7 @@
       {#if Array.isArray(data.posts)}
         {#each data.posts as item}
           <tr>
-            <td><a href="/board/detail/{item._id}">{item.title}</a></td>
+            <td><a href="/board/detail/{item.id}">{item.title}</a></td>
             <td>{item.writer}</td>
             <td>{item.hits}</td>
             <td>{dayjs(item.createdDt).format("YY.MM.DD HH시mm분")}</td>
@@ -98,15 +89,6 @@
           <td colspan="4">No data available</td>
         </tr>
       {/if}
-      <!-- {#if Array.isArray(data.paginator.pageList)}
-        {#each data.paginator.pageList as page}
-          <button
-            on:click={async () => {
-              await getPageData(page, "");
-            }}>{page}</button
-          >
-        {/each}
-      {/if} -->
     </tbody>
   </table>
 </div>

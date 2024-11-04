@@ -11,25 +11,18 @@ export async function load({ params }: { params: any }) {
   const board = await apiFetch(`/graphql`, {
     method: "POST",
     body: JSON.stringify({
-      query: `{
-  post(id : "${id}"){
-    _id,
-    title,
-    writer,
-    password,
-    hits,
+      query: `query{
+  findById(id:"${id}")
+  {
+    id
+    title
     content
-    comments{
-      idx,
-      name,
-      comment,
-      createdDt
-    }
+    writer
   }
 }`,
     }),
   });
   return {
-    detail: board.data.post,
+    detail: board.data.findById,
   };
 }
